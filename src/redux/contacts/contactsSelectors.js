@@ -2,12 +2,16 @@ export const selectContacts = state => {
   if (state === undefined) {
     return;
   }
-  return state.contacts;
+  return state.contacts.contacts;
 };
 
 export const selectFilter = state => {
   if (state === undefined) {
     return;
   }
-  return state.filter;
+  return state.contacts.filter;
+};
+
+export const selectLoading = state => {
+  return state.contacts.contacts.isLoading;
 };

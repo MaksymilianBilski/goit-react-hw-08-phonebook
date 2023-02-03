@@ -1,10 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
-import { addContacts } from 'redux/operation';
-import { nanoid } from 'nanoid';
-import css from './Form.module.css';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
+import { selectContacts } from 'redux/contacts/contactsSelectors';
+import { addContacts } from 'redux/contacts/contactsOperation';
+import css from './TaskEditor.module.css';
 
-export const AddContacts = () => {
+export const TaskEditor = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 

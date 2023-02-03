@@ -1,29 +1,47 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
+import { refreshUser } from 'redux/auth/authOperation';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operation';
-import { selectContacts } from 'redux/selectors';
-import { AddContacts } from './Form/ContactsList';
-import { Section } from './Section/Section';
-import { SearchForm } from './SearchByName/SearchForm';
-import { ContactsList } from './ContactsList/ContactsList';
+import { Layout } from './Layout';
+import Register from 'pages/Register';
+import Login from 'pages/Login';
+import Home from 'pages/Home';
+import Tasks from 'pages/Tasks';
+import { useAuth } from 'hooks';
 
 export const App = () => {
   const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
-  const { items, isLoading, error } = useSelector(selectContacts);
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
-    <div>
-      {isLoading && !error && <div>Loading...</div>}
-      {error && <b>{error}</b>}
-      <Section title="Phonebook">
-        <AddContacts />
-      </Section>
-      <SearchForm />
-      {items !== undefined && <ContactsList />}
-    </div>
+  return isRefreshing ? (
+    <b> Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/phonebook" component={<Register />} />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/phonebook" component={<Login />} />
+          }
+        />
+        <Route
+          path="/phonebook"
+          element={<PrivateRoute redirectTo="/login" component={<Tasks />} />}
+        />
+      </Route>
+    </Routes>
   );
 };

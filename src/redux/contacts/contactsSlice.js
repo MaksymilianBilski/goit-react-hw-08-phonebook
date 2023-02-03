@@ -1,6 +1,6 @@
 import { combineReducers, createSlice } from '@reduxjs/toolkit';
 import filterSlice from './filterSlice';
-import { fetchContacts, addContacts, removeContact } from './operation';
+import { fetchContacts, addContacts, removeContact } from './contactsOperation';
 
 const initialState = { items: [], isLoading: false, error: null };
 
