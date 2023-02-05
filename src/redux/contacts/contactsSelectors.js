@@ -13,5 +13,5 @@ export const selectFilter = state => {
 };
 
 export const selectLoading = state => {
-  return state.contacts.contacts.isLoading;
+  return state.contacts.isLoading;
 };
