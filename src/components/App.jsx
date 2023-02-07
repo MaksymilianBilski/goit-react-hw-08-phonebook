@@ -10,7 +10,7 @@ import { useAuth } from 'hooks';
 const Home = lazy(() => import('../pages/Home'));
 const Register = lazy(() => import('../pages/Register'));
 const Login = lazy(() => import('../pages/Login'));
-const Tasks = lazy(() => import('../pages/Tasks'));
+const Contacts = lazy(() => import('../pages/Contacts'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ export const App = () => {
           element={
             <PrivateRoute
               redirectTo="/goit-react-hw-08-phonebook/login"
-              component={<Tasks />}
+              component={<Contacts />}
             />
           }
         />

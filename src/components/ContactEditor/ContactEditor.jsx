@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { selectContacts } from 'redux/contacts/contactsSelectors';
 import { addContacts } from 'redux/contacts/contactsOperation';
-import css from './TaskEditor.module.css';
+import css from './ContactEditor.module.css';
 
 export const TaskEditor = () => {
   const contacts = useSelector(selectContacts);
